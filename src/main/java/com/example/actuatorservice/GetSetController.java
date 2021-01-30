@@ -1,6 +1,7 @@
 package com.example.actuatorservice;
 
 import java.sql.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,18 +46,22 @@ public class GetSetController {
 
                     Statement stmtObj = connection.createStatement();
 
-                    ResultSet resObj = stmtObj.executeQuery("SELECT  expenses.id, costname.name, expenses.price, expenses.date, expenses.amount " +
+                    ResultSet resObj = stmtObj.executeQuery("SELECT  expenses.id, costname.name, expenses.price, expenses.datePurchase, expenses.amount, " +
+                                                                "expenses.dateTimeCreate, expenses.dateTimeInDB " +
                                                                 "FROM lab_expenses.expenses " +
                                                                 "inner join lab_expenses.costname on costname.id = expenses.idCname " +
-                                                                "where expenses.date >= \""+dateStart+"\" and expenses.date <= \""+dateEnd+"\"");
+                                                                "where expenses.datePurchase >= \""+dateStart+"\" and expenses.datePurchase <= \""+dateEnd+"\"");
 
                     while (resObj.next()) {
                         dt = new Data(
                                 resObj.getInt("id"),
                                 resObj.getString("name"),
                                 resObj.getFloat("price"),
-                                resObj.getString("Date"),
-                                resObj.getInt("amount"));
+                                resObj.getString("datePurchase"),
+                                resObj.getInt("amount"),
+                                resObj.getString("dateTimeCreate"),
+                                resObj.getString("dateTimeInDB"));
+
                         dtSql.add(dt);
                     }
 
@@ -116,6 +121,11 @@ public class GetSetController {
             Data dt = new Data();
             Data d2;
 
+
+            Date dateTimeInDB;
+            String stringTimeInDB;
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+
             while (resObj.next()) {
                 dt.setId(resObj.getInt("id"));
                 dt.setName(resObj.getString("name"));
@@ -129,7 +139,11 @@ public class GetSetController {
                     d2 = dtSql.get(i);
 
                     if (d2.getName().equals(d.getName())) {
-                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\")";
+
+                        dateTimeInDB  = new Date();
+                        stringTimeInDB = df.format(dateTimeInDB.getTime());
+
+                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
 
                     } else if (i + 1 == dtSql.size()) {
 
@@ -138,12 +152,15 @@ public class GetSetController {
                         resObj2 = stmtObj.executeQuery("SELECT id FROM costname where name = \"" + d.getName() + "\"");
                         resObj2.next();
 
-                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\")";
+                        dateTimeInDB  = new Date();
+                        stringTimeInDB = df.format(dateTimeInDB.getTime());
+
+                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
                     }
 
                     if (!st.equals("")) {
 
-                        stmtObj.execute("insert into expenses(idCname, price, date, amount) value " + st);
+                        stmtObj.execute("insert into expenses(idCname, price, datePurchase, amount, dateTimeCreate, dateTimeInDB) value " + st);
                         st = "";
                         break;
                     }
