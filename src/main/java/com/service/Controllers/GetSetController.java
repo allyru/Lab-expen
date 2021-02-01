@@ -6,6 +6,7 @@ import com.service.Items.Data;
 import com.service.Service.DeleteData;
 import com.service.Service.ReturnData;
 import com.service.Service.SetData;
+import com.service.Service.UpdateData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,6 +49,14 @@ public class GetSetController {
 
         SetData sd = new SetData();
         return sd.set(data);
+
+    }
+
+    @PutMapping(consumes = "application/json", produces = "application/json")
+    public HttpStatus put(@RequestBody Data data)
+    {
+        UpdateData ud = new UpdateData();
+        return ud.update(data);
 
     }
 
