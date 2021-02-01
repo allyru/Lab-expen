@@ -1,4 +1,4 @@
-package com.example.actuatorservice;
+package com.service.Items;
 
 public class Data {
     private long id;
