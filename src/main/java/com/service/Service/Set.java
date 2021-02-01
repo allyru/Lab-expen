@@ -1,6 +1,7 @@
 package com.service.Service;
 
 import com.service.Items.Data;
+import com.service.Items.ReceivingData;
 import org.springframework.http.HttpStatus;
 
 import java.sql.*;
@@ -9,13 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SetData {
+public class Set {
 
     private final String url = "jdbc:mysql://localhost:3306/lab_expenses";
     private final String username = "root";
     private final String password = "9999";
 
-    public HttpStatus set(ArrayList<Data> data)
+    public HttpStatus set(ArrayList<ReceivingData> data)
     {
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
 
@@ -41,7 +42,7 @@ public class SetData {
                 dt = new Data();
             }
 
-            for (Data d:data) {
+            for (ReceivingData d:data) {
                 for (int i = 0; i < dtSql.size(); i++) {
                     d2 = dtSql.get(i);
 
@@ -50,7 +51,7 @@ public class SetData {
                         dateTimeInDB  = new Date();
                         stringTimeInDB = df.format(dateTimeInDB.getTime());
 
-                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
+                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
 
                     } else if (i + 1 == dtSql.size()) {
 
@@ -62,7 +63,7 @@ public class SetData {
                         dateTimeInDB  = new Date();
                         stringTimeInDB = df.format(dateTimeInDB.getTime());
 
-                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDate() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
+                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
                     }
 
                     if (!st.equals("")) {

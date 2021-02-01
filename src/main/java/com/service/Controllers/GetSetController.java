@@ -3,10 +3,11 @@ package com.service.Controllers;
 import java.util.ArrayList;
 
 import com.service.Items.Data;
-import com.service.Service.DeleteData;
-import com.service.Service.ReturnData;
-import com.service.Service.SetData;
-import com.service.Service.UpdateData;
+import com.service.Items.ReceivingData;
+import com.service.Service.Delete;
+import com.service.Service.Return;
+import com.service.Service.Set;
+import com.service.Service.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class GetSetController {
     public ArrayList<Data> gets(@RequestParam(value = "dateStart", defaultValue = "0000.00.00") String dateStart,
                                 @RequestParam(value = "dateEnd", defaultValue = "9999.12.30") String dateEnd) {
 
-        ReturnData rd = new ReturnData();
+        Return rd = new Return();
         return  rd.get(dateEnd, dateStart);
 
     }
@@ -40,14 +41,14 @@ public class GetSetController {
     @DeleteMapping()
     public  HttpStatus remove(@RequestParam (value = "id") String id) {
 
-        DeleteData dd = new DeleteData();
+        Delete dd = new Delete();
         return dd.remove(id);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public HttpStatus set(@RequestBody ArrayList<Data> data) {
+    public HttpStatus set(@RequestBody ArrayList<ReceivingData> data) {
 
-        SetData sd = new SetData();
+        Set sd = new Set();
         return sd.set(data);
 
     }
@@ -55,7 +56,7 @@ public class GetSetController {
     @PutMapping(consumes = "application/json", produces = "application/json")
     public HttpStatus put(@RequestBody Data data)
     {
-        UpdateData ud = new UpdateData();
+        Update ud = new Update();
         return ud.update(data);
 
     }

@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ReturnData {
+public class Return {
 
     private final String url = "jdbc:mysql://localhost:3306/lab_expenses";
     private final String username = "root";
