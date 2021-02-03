@@ -8,9 +8,10 @@ public class Data {
     private int amount;
     private String dateTimeCreate;
     private String dateTimeInDB;
+    private String userName;
 
 
-    public Data(long id, String name, float price, String datePurchase, int amount, String dateTimeCreate, String dateTimeInDB) {
+    public Data(long id, String name, float price, String datePurchase, int amount, String dateTimeCreate, String dateTimeInDB, String userName) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -18,6 +19,7 @@ public class Data {
         this.amount = amount;
         this.dateTimeCreate = dateTimeCreate;
         this.dateTimeInDB = dateTimeInDB;
+        this.userName = userName;
     }
 
     public Data() {
@@ -28,6 +30,7 @@ public class Data {
         this.amount = 0;
         this.dateTimeCreate = "";
         this.dateTimeInDB =  "";
+        this.userName = "";
     }
 
     public void setId(long id){
@@ -50,13 +53,16 @@ public class Data {
         this.datePurchase = datePurchase;
     }
 
-
     public void setDateTimeCreate(String dateTimeCreate){
         this.dateTimeCreate = dateTimeCreate;
     }
 
     public void setDateTimeInDB(String dateTimeInDB){
         this.dateTimeInDB = dateTimeInDB;
+    }
+
+    public void setUserName(String userName){
+        this.userName = userName;
     }
 
     public long getId() { return id; }
@@ -67,9 +73,11 @@ public class Data {
 
     public int getAmount() { return amount; }
 
-    public String getDatePurchase() { return datePurchase;  }
+    public String getDatePurchase() { return datePurchase; }
 
     public String getDateTimeCreate() { return dateTimeCreate; }
 
-    public String getDateTimeInDB() { return dateTimeInDB;  }
+    public String getDateTimeInDB() { return dateTimeInDB; }
+
+    public String getUserName() { return userName; }
 }

@@ -51,7 +51,7 @@ public class Set {
                         dateTimeInDB  = new Date();
                         stringTimeInDB = df.format(dateTimeInDB.getTime());
 
-                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
+                        st = "(\"" + d2.getId() + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\",\"" + d.getUserName() + "\")";
 
                     } else if (i + 1 == dtSql.size()) {
 
@@ -63,12 +63,12 @@ public class Set {
                         dateTimeInDB  = new Date();
                         stringTimeInDB = df.format(dateTimeInDB.getTime());
 
-                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\")";
+                        st = "(\"" + resObj2.getInt("id") + "\",\"" + d.getPrice() + "\",\"" + d.getDatePurchase() + "\",\"" + d.getAmount() + "\",\"" + d.getDateTimeCreate() + "\",\"" + stringTimeInDB + "\",\"" + d.getUserName() + "\")";
                     }
 
                     if (!st.equals("")) {
 
-                        stmtObj.execute("insert into expenses(idCname, price, datePurchase, amount, dateTimeCreate, dateTimeInDB) value " + st);
+                        stmtObj.execute("insert into expenses(idCname, price, datePurchase, amount, dateTimeCreate, dateTimeInDB, userName) value " + st);
                         st = "";
                         break;
                     }

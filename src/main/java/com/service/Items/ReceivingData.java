@@ -2,19 +2,21 @@ package com.service.Items;
 
 public class ReceivingData {
 
-    private String name;
-    private float price;
-    private int amount;
-    private String datePurchase;
-    private String dateTimeCreate;
+    private final String name;
+    private final float price;
+    private final int amount;
+    private final String datePurchase;
+    private final String dateTimeCreate;
+    private final String userName;
 
 
-    public ReceivingData(String name, float price, String datePurchase, int amount, String dateTimeCreate) {
+    public ReceivingData(String name, float price, String datePurchase, int amount, String dateTimeCreate, String userName) {
         this.name = name;
         this.price = price;
         this.datePurchase = datePurchase;
         this.amount = amount;
         this.dateTimeCreate = dateTimeCreate;
+        this.userName = userName;
     }
 
     public ReceivingData() {
@@ -23,6 +25,7 @@ public class ReceivingData {
         this.datePurchase = "";
         this.amount = 0;
         this.dateTimeCreate = "";
+        this.userName = "";
     }
 
     public String getName() { return name; }
@@ -35,4 +38,5 @@ public class ReceivingData {
 
     public String getDateTimeCreate() { return dateTimeCreate; }
 
+    public String getUserName() { return userName; }
 }

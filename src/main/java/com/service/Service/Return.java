@@ -40,7 +40,7 @@ public class Return {
                     Statement stmtObj = connection.createStatement();
 
                     ResultSet resObj = stmtObj.executeQuery("SELECT  expenses.id, costname.name, expenses.price, expenses.datePurchase, expenses.amount, " +
-                            "expenses.dateTimeCreate, expenses.dateTimeInDB " +
+                            "expenses.dateTimeCreate, expenses.dateTimeInDB, expenses.userName " +
                             "FROM lab_expenses.expenses " +
                             "inner join lab_expenses.costname on costname.id = expenses.idCname " +
                             "where expenses.datePurchase >= \""+dateStart+"\" and expenses.datePurchase <= \""+dateEnd+"\"");
@@ -53,7 +53,8 @@ public class Return {
                                 resObj.getString("datePurchase"),
                                 resObj.getInt("amount"),
                                 resObj.getString("dateTimeCreate"),
-                                resObj.getString("dateTimeInDB"));
+                                resObj.getString("dateTimeInDB"),
+                                resObj.getString("userName"));
 
                         dtSql.add(dt);
                     }
