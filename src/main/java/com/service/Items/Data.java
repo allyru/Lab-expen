@@ -10,7 +10,6 @@ public class Data {
     private String dateTimeInDB;
     private String userName;
 
-
     public Data(long id, String name, float price, String datePurchase, int amount, String dateTimeCreate, String dateTimeInDB, String userName) {
         this.id = id;
         this.name = name;

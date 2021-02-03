@@ -9,7 +9,6 @@ import java.sql.Statement;
 
 public class Delete {
 
-
     private final String url = "jdbc:mysql://localhost:3306/lab_expenses";
     private final String username = "root";
     private final String password = "9999";
